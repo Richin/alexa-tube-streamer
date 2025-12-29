@@ -23,7 +23,7 @@ function getAudioStream(query) {
             command = 'yt-dlp';
         }
 
-        command += ` "ytsearch1:${query}" --dump-single-json --no-warnings --no-call-home -f "bestaudio/best" --skip-download`;
+        command += ` "ytsearch1:${query}" --dump-single-json --no-warnings -f "bestaudio/best" --skip-download`;
 
         exec(command, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
             if (error) {
