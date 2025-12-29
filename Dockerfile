@@ -7,7 +7,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install yt-dlp via pip (always gets the latest version)
-RUN python3 -m pip install -U yt-dlp
+# flag --break-system-packages is needed for newer Debian versions (Bookworm+) included in node:18-slim
+RUN python3 -m pip install -U yt-dlp --break-system-packages
 
 # Create app directory
 WORKDIR /usr/src/app
