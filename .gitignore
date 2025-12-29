@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log
+yarn-error.log
+*.log
+yt-dlp.exe
+output.txt
+.DS_Store
