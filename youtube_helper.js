@@ -23,7 +23,19 @@ function getAudioStream(query) {
             command = 'yt-dlp';
         }
 
+        // Check for cookies.txt to bypass "Sign in" errors
+        const fs = require('fs');
+        const cookiePath = path.join(__dirname, 'cookies.txt');
+
         command += ` "ytsearch1:${query}" --dump-single-json --no-warnings -f "bestaudio/best" --skip-download`;
+
+        // Add User Agent to try and look like a browser
+        command += ' --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"';
+
+        if (fs.existsSync(cookiePath)) {
+            console.log('Using cookies.txt for authentication');
+            command += ` --cookies "${cookiePath}"`;
+        }
 
         exec(command, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
             if (error) {
